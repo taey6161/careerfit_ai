@@ -1,0 +1,49 @@
+# backend/main.py (수정)
+
+from fastapi import FastAPI
+
+from fastapi.middleware.cors import CORSMiddleware
+
+from routers import health, jobs, analyze
+
+
+app = FastAPI(
+
+    title="CareerFit AI",
+
+    description="취업·공모전 데이터 기반 맞춤형 AI 포트폴리오 코치",
+
+    version="0.1.0"
+
+)
+
+app.add_middleware(
+
+ CORSMiddleware,
+
+ allow_origins=["http://localhost:5173"],
+
+ allow_credentials=True,
+
+ allow_methods=["*"],
+
+ allow_headers=["*"],
+
+)
+
+
+
+# 라우터 등록
+
+app.include_router(health.router)
+app.include_router(jobs.router)
+app.include_router(analyze.router)
+
+
+
+
+@app.get("/")
+
+def root():
+
+    return {"message": "CareerFit AI 서버가 실행 중입니다."}
