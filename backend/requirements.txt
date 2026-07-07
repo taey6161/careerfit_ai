@@ -11,3 +11,6 @@ pandas==2.2.3
 chromadb==0.5.23
 
 pydantic==2.10.3
+
+requests
+huggingface_hub
